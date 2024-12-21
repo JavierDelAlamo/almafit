@@ -52,9 +52,11 @@ class EntradaResource extends Resource
                 Forms\Components\RichEditor::make('cuerpo')
                     ->required()
                     ->columnSpanFull(),
+                //La imagen es de tipo FileUploap para poder subir la imagen a local.
                 Forms\Components\FileUpload::make('image_url')
                     ->image()
                     ->required()
+                    
                     
             ]);
     }
