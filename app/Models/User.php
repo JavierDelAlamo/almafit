@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -17,6 +18,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    //Estos son los campos que podemos rellenar
     protected $fillable = [
         'name',
         'email',
@@ -28,6 +30,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    //Estos son los  campos que no podemos rellenar
     protected $hidden = [
         'password',
         'remember_token',
@@ -43,6 +46,25 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-        ];
+        ]; 
     }
+    
+     //Un User tiene varias Entradas
+     public function entradas():HasMany
+     {
+         return $this->hasMany(Entrada::class);
+     }
+
+     //Funcion para crear el primer usuario por comandos
+     public function crearUsuario()
+{
+    User::create([
+        'name' => 'JavierAdmin',
+        'email' => 'admin@admin.com',
+        'password' => bcrypt('12341234'), // Recuerda cifrar la contraseña
+    ]);
+
+    return 'Usuario creado exitosamente';
+}
+
 }
