@@ -26,9 +26,9 @@ return new class extends Migration
 
             $table->string('titulo');
             //la etiqueta va a ser unica, renderizado SEO como motor de busqueda en la URL
-            $table->string('etiqueta');
+            $table->string('slug');
             $table->text('cuerpo');
-            $table->string('imagen');
+            $table->string ('image_url');
             $table->timestamps();
         });
     }
