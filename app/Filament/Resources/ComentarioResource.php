@@ -24,9 +24,10 @@ class ComentarioResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('entrada_id')
-                    ->relationship('entrada', 'id')
+                    ->relationship('entrada', 'titulo')
                     ->required(),
                 Forms\Components\Textarea::make('cuerpo')
+                    ->label('Comentario')
                     ->required()
                     ->columnSpanFull(),
             ]);
@@ -36,9 +37,13 @@ class ComentarioResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('entrada.id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('entrada.titulo'),
+                    
+                    
+                Tables\Columns\TextColumn::make('cuerpo')
+                    ->label('Comentario'),
+                    
+                    
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
