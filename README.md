@@ -1,6 +1,6 @@
 # AlmaFit
 
-Una breve descripción de lo que hace tu proyecto.
+Proyecto Fin de Grado
 
 ---
 
