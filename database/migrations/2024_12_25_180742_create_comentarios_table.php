@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('entrada_id');
+            //Relacion. Cada comentario esta vinculado a una entrada
+            $table->foreign('entrada_id')->references('id')->on ('entradas');
+            $table->text('cuerpo');
             $table->timestamps();
         });
     }
