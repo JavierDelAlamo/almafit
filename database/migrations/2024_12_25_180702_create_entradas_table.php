@@ -17,6 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             //Relacion ForeignKey
             $table->foreign('user_id')->references('id')->on ('users');
+            //Categoria que crea la Entrada
+            $table->unsignedBigInteger('categoria_id');
+            //Relacion ForeingK
+            $table->foreign('categoria_id')->references('id')->on ('categorias');
             $table->string('titulo');
             //la etiqueta va a ser unica, renderizado SEO como motor de busqueda en la URL
             $table->string('slug');
