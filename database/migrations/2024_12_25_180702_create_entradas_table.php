@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('entradas', function (Blueprint $table) {
             $table->id();
+            //Usuario que crea la Entrada
+            $table->unsignedBigInteger('user_id');
+            //Relacion ForeignKey
+            $table->foreign('user_id')->references('id')->on ('users');
+            $table->string('titulo');
+            //la etiqueta va a ser unica, renderizado SEO como motor de busqueda en la URL
+            $table->string('slug');
+            $table->text('cuerpo');
+            $table->string ('image_url');
             $table->timestamps();
         });
     }
