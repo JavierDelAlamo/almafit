@@ -16,6 +16,8 @@ use Filament\Tables\Table; //Añadimos la clase Table
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select; //Añadimos la clase Select
+use Illuminate\Support\Facades\Date;
+use Carbon\Carbon; // Añadir la clase Carbon
 
 class UserResource extends Resource
 {
@@ -69,21 +71,40 @@ class UserResource extends Resource
                 TextColumn::make('email') //Añadimos una columna con el email
                     ->label('Correo electrónico'),
                 TextColumn::make('email_verified_at') //Añadimos una columna con la fecha de verificación del email
-                    ->label('Verificado el'),
+                    ->label('Verificado el')
+                    ->formatStateUsing(fn ($state) => $state ? Carbon::parse($state)->format('d-m-Y H:i:s') : null), // Formatear la fecha al mostrarla
                 TextColumn::make('roles.name') //Añadimos una columna con el rol
                     ->label('Rol'), 
-
-
-
-
-
-
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('verificados')
+                    ->query(fn(Builder $query):Builder=> $query->whereNotNull('email_verified_at')),
+                Tables\Filters\Filter::make('No verificados')
+                    ->query(fn(Builder $query):Builder=> $query->whereNull('email_verified_at')),
+                Tables\Filters\Filter::make('Entrenadores')
+                    ->query(fn(Builder $query):Builder=> $query->whereHas('roles', function (Builder $query) {
+                        $query->where('name', 'entrenador');
+                    })),
+                Tables\Filters\Filter::make('Usuarios')
+                    ->query(fn(Builder $query):Builder=> $query->whereHas('roles', function (Builder $query) {
+                        $query->where('name', 'usuario');
+                    })),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('Verificar')  //Añadimos una acción 
+                ->icon('heroicon-m-check-badge') //Añadimos un icono
+                ->action(function(User $user) { //Definimos la acción
+                    $user->email_verified_at = Carbon::now(); // Guardar la fecha como un objeto Carbon (HORA ESPAÑOLA)
+                    $user->save(); //Guardamos el usuario
+                }),
+                Tables\Actions\Action::make('Revocar')    //Añadimos una acción  
+                ->icon('heroicon-m-x-circle') //Añadimos un icono
+                ->action(function(User $user) { //Definimos la acción
+                    $user->email_verified_at = null; // Revocar la fecha de verificación
+                    $user->save(); //Guardamos el usuario
+                })
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
