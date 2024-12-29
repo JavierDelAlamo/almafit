@@ -12,12 +12,13 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables; //Añadimos la clase Tables
 use Filament\Tables\Columns\TextColumn; //Añadimos la clase TextColumn
+use Filament\Tables\Filters\TextFilter; //Añadimos la clase TextFilter
 use Filament\Tables\Table; //Añadimos la clase Table
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select; //Añadimos la clase Select
-use Illuminate\Support\Facades\Date;
-use Carbon\Carbon; // Añadir la clase Carbon
+use Filament\Forms\Components\Radio; //Añadimos la clase Radio
+use Carbon\Carbon; //Añadimos la clase Carbon
 
 class UserResource extends Resource
 {
@@ -67,14 +68,27 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name') //Añadimos una columna con el nombre
+                    ->searchable()
                     ->label('Nombre'),
                 TextColumn::make('email') //Añadimos una columna con el email
+                    ->searchable()
                     ->label('Correo electrónico'),
                 TextColumn::make('email_verified_at') //Añadimos una columna con la fecha de verificación del email
+                    ->searchable()
                     ->label('Verificado el')
                     ->formatStateUsing(fn ($state) => $state ? Carbon::parse($state)->format('d-m-Y H:i:s') : null), // Formatear la fecha al mostrarla
                 TextColumn::make('roles.name') //Añadimos una columna con el rol
-                    ->label('Rol'), 
+                    // ->searchable()
+                    ->label('Rol'),
+                // TextColumn::make('service_type') //Añadimos una columna con el servicio
+
+
+               
+
+
+
+
+
             ])
             ->filters([
                 Tables\Filters\Filter::make('verificados')
@@ -89,7 +103,7 @@ class UserResource extends Resource
                     ->query(fn(Builder $query):Builder=> $query->whereHas('roles', function (Builder $query) {
                         $query->where('name', 'usuario');
                     })),
-            ])
+                    ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('Verificar')  //Añadimos una acción 
