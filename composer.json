@@ -11,6 +11,7 @@
         "filament/filament": "^3.0-stable",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
+        "pxlrbt/filament-excel": "^2.3",
         "spatie/laravel-permission": "^6.10"
     },
     "require-dev": {

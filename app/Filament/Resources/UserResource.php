@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select; //Añadimos la clase Select
 use Filament\Forms\Components\Radio; //Añadimos la clase Radio
 use Carbon\Carbon; //Añadimos la clase Carbon
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction; //Añadimos la clase ExportBulkAction
+
 
 class UserResource extends Resource
 {
@@ -121,9 +123,17 @@ class UserResource extends Resource
                 
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                //     ExportBulkAction::make(), //Añadimos la acción de exportar
+                Tables\Actions\DeleteBulkAction::make(),
+                ExportBulkAction::make()
+                    ->label('Exportar')
+                    ->color('warning') // Cambiar el color a naranja
+                    ->icon('heroicon-o-arrow-down-tray') // Añadir un icono
+                    ->button(), // Mostrar como botón fuera del desplegable  
+            
             ]);
     }
 
