@@ -13,7 +13,7 @@ class EntradaPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyRole(['Admin', 'Entrenador']);
+        return $user->hasAnyRole(['Admin', 'Entrenador','Usuario']);
     }
 
     /**
@@ -21,7 +21,7 @@ class EntradaPolicy
      */
     public function view(User $user, Entrada $entrada): bool
     {
-        return $user->hasAnyRole(['Admin', 'Entrenador']);
+        return $user->hasAnyRole(['Admin', 'Entrenador','Usuario']);
     }
 
     /**
