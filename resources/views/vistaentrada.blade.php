@@ -113,9 +113,9 @@
     <!-- Barra de Navegacion -->
     <nav class="w-full py-4 bg-blue-800 border-t border-b">
         <div class="container mx-auto flex justify-center space-x-4 text-sm">
-            <a href="#" class="hover:bg-blue-200 hover:text-black rounded py-5 px-7 text-white text-xl">Technology</a>
-            <a href="#" class="hover:bg-blue-200 hover:text-black rounded py-5 px-7 text-white text-xl">Automotive</a>
-            <a href="#" class="hover:bg-blue-200 hover:text-black rounded py-5 px-7 text-white text-xl">Finance</a>
+            @foreach($categorias as $categoria)
+                <a href="{{ route('categoria.show', $categoria->id) }}" class="hover:bg-blue-200 hover:text-black rounded py-5 px-7 text-white text-xl">{{ $categoria->nombre }}</a>
+            @endforeach
         </div>
     </nav>
 
@@ -152,10 +152,10 @@
     <footer class="w-full border-t bg-white py-6">
         <div class="container mx-auto flex flex-col items-center">
             <div class="flex space-x-4">
-                <a href="#" class="uppercase text-sm">About Us</a>
-                <a href="#" class="uppercase text-sm">Privacy Policy</a>
-                <a href="#" class="uppercase text-sm">Terms & Conditions</a>
-                <a href="#" class="uppercase text-sm">Contact Us</a>
+                <a href="#" class="uppercase text-sm">Sobre Nosotros</a>
+                <a href="#" class="uppercase text-sm">Privacidad</a>
+                <a href="#" class="uppercase text-sm">Terminos y condiciones</a>
+                <a href="#" class="uppercase text-sm">Sobre Nosotros</a>
             </div>
             <p class="text-gray-800 text-sm mt-4">&copy; almafit.com</p>
         </div>
