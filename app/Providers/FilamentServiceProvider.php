@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Filament\Facades\Filament;
+use App\Providers\Filament\AdminPanelProvider;
 
 class FilamentServiceProvider extends ServiceProvider
 {
@@ -20,13 +21,6 @@ class FilamentServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Filament::serving(function () {
-            Filament::registerRenderHook('branding', function () {
-                return '<div class="flex items-center space-x-2">
-                            <img src="' . asset('/logo.gif') . '" alt="Logo" class="h-8 w-auto">
-                            <span class="font-bold text-lg">AlmaFit</span>
-                        </div>';
-            });
-        });
+        
     }
 }

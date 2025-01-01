@@ -29,8 +29,8 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: bottom;
-            margin-left: 0; /* Cambiar a 0 */
-            margin-right: 0; /* Cambiar a 0 */
+            margin-left: 0;
+            margin-right: 0;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -44,8 +44,8 @@
 
         @media (min-width: 768px) {
             header {
-                margin-left: 0; /* Cambiar a 0 */
-                margin-right: 0; /* Cambiar a 0 */
+                margin-left: 0;
+                margin-right: 0;
             }
 
             .container {
@@ -56,8 +56,8 @@
 
         @media (min-width: 1024px) {
             header {
-                margin-left: 0; /* Cambiar a 0 */
-                margin-right: 0; /* Cambiar a 0 */
+                margin-left: 0;
+                margin-right: 0;
             }
 
             .container {
@@ -94,13 +94,24 @@
             <ul class="flex items-center space-x-4 font-bold text-sm text-white uppercase">
                 <li><a class="hover:bg-blue-600 rounded py-2 px-4 text-white" href="/almafit-admin/login">PANEL ADMIN</a></li>
                 <li><a class="hover:bg-blue-600 rounded py-2 px-4 text-white" href="#">AYUDA</a></li>
-            </ul>
-            <div class="flex items-center space-x-6 text-white text-lg">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </ul>  
+             <!-- Botón para abrir el modal -->
+        <button onclick="document.getElementById('sugerenciasModal').classList.remove('hidden')" class="px-4 py-2 bg-indigo-500 text-white font-bold rounded-md hover:bg-indigo-700 uppercase">
+            Sugerencias
+        </button>
+
+        <!-- Modal -->
+        <div id="sugerenciasModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
+            <div class="bg-white rounded-lg p-6 w-1/3">
+                <h2 class="text-xl font-bold mb-4">Envíanos tu sugerencia</h2>
+
+                @include('formulario') <!-- Incluye el formulario aquí -->
+
+                <button onclick="document.getElementById('sugerenciasModal').classList.add('hidden')" class="mt-4 px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-700">
+                    Cerrar
+                </button>
             </div>
+        </div>
         </div>
     </nav>
 

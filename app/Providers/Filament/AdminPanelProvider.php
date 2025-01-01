@@ -18,7 +18,6 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Symfony\Component\HttpKernel\Profiler\Profile;
-use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
 
 class AdminPanelProvider extends PanelProvider
@@ -31,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('almafit-admin')
             ->login()
             ->favicon('http://localhost:8000/favicon3.png') // Añade esta línea para el icono
-            //->logo('http://localhost:8000/logo.gif') // Añade esta línea para el logo
+            //->logo('http://localhost:8000/public/logo.gif') // Añade esta línea para el logo
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -57,30 +56,9 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            
-            ->plugin(FilamentSpatieLaravelBackupPlugin::make())
-            ->plugins($this->getAdminPlugins())
             // ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->authMiddleware([
                 Authenticate::class,
             ]);
-    }
-
-    protected function getAdminPlugins(): array
-    {
-        if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->hasRole('admin')) {
-            return [
-                \Awcodes\Curator\CuratorPlugin::make()
-                    ->label('Media')
-                    ->pluralLabel('Media')
-                    ->navigationIcon('heroicon-o-photo')
-                    ->navigationGroup('Content')
-                    ->navigationSort(3)
-                    ->navigationCountBadge()
-                    ->registerNavigation(true)
-            ];
-        }
-
-        return [];
     }
 }
