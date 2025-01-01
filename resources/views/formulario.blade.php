@@ -55,19 +55,30 @@
         .form-container .form-group button:hover {
             background-color: #434190;
         }
+        .success-message {
+            display: none;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+        }
+        .success-message.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h1 class="text-2xl font-bold mb-5">Formulario</h1>
 
-        @if (session('success'))
-            <div class="mb-4 text-green-600 font-bold">
-                {{ session('success') }}
-            </div>
-        @endif
+        <div id="success-message" class="success-message">
+            Enviado correctamente
+            <button onclick="document.getElementById('success-message').classList.remove('show')" class="ml-4 px-2 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-700">Cerrar</button>
+        </div>
 
-        <form action="{{ route('sugerencias.store') }}" method="POST">
+        <form id="sugerencia-form" action="{{ route('sugerencias.store') }}" method="POST">
             @csrf <!-- Token de seguridad obligatorio en Laravel -->
 
             <div class="form-group">
@@ -92,5 +103,28 @@
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script> <!-- Asegúrate de tener un archivo JS si es necesario -->
+    <script>
+        document.getElementById('sugerencia-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var form = this;
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('success-message').classList.add('show');
+                    form.reset();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>

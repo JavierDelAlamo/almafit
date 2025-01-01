@@ -17,6 +17,7 @@ class SugerenciaController extends Controller
 
         Sugerencia::create($request->all());
 
-        return redirect()->back()->with('success', 'Enviado correctamente');
+        // Devolver una respuesta JSON
+        return response()->json(['success' => true]);
     }
 }
