@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Entrada;
+use App\Models\Categoria;
 
 class HomeController extends Controller
 {
 public function index(){
+    $categorias = Categoria::all();
     $entradas=Entrada::all();
-    return view('home',['entradas'=>$entradas]);
+    return view('home', compact('categorias', 'entradas'));
 }
 public function vistaentrada($slug){
     $entrada=Entrada::where('slug',$slug)->first();
