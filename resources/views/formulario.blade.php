@@ -14,6 +14,12 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        @media (max-width: 768px) {
+            .form-container {
+                width: 100%;
+                padding: 1rem;
+            }
+        }
         .form-container h1 {
             margin-bottom: 1.5rem;
         }
@@ -102,7 +108,7 @@
         </form>
     </div>
 
-    <script src="{{ asset('js/app.js') }}"></script> <!-- Asegúrate de tener un archivo JS si es necesario -->
+    <script src="{{ asset('js/app.js') }}"></script> 
     <script>
         document.getElementById('sugerencia-form').addEventListener('submit', function(event) {
             event.preventDefault();

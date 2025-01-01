@@ -22,19 +22,20 @@
             background-image: url('{{ asset('storage/fondoweb2.jpg') }}');
             background-size: cover;
             background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         header {
             background-image: url('{{ asset('storage/fondoheader3.jpg') }}');
             background-size: cover;
             background-repeat: no-repeat;
-            background-position: bottom;
-            margin-left: 0; /* Cambiar a 0 */
-            margin-right: 0; /* Cambiar a 0 */
+            background-position: center center; /* Centrar la imagen */
+            margin-left: 0;
+            margin-right: 0;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            height: 300px;
+            height: 250px; /* Aumentar altura */
         }
 
         .container {
@@ -44,8 +45,8 @@
 
         @media (min-width: 768px) {
             header {
-                margin-left: 0; /* Cambiar a 0 */
-                margin-right: 0; /* Cambiar a 0 */
+                margin-left: 0; 
+                margin-right: 0; 
             }
 
             .container {
@@ -80,6 +81,140 @@
         .rich-editor-content ul li, .rich-editor-content ol li {
             margin-bottom: 0.5rem;
         }
+
+        @media (max-width: 768px) {
+            body {
+                margin: 0; /* Sin márgenes */
+                padding: 0; /* Sin relleno */
+            }
+
+            .container, .nav, header, .nav-categorias, .container article {
+                margin: 0; /* Sin márgenes */
+                padding: 0; /* Sin relleno */
+            }
+
+            header {
+                height: 150px; /* Reducir altura */
+                padding: 1rem 0.5rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 0.875rem;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav ul li {
+                margin-bottom: 0.5rem;
+            }
+
+            .nav ul li a {
+                padding: 0.5rem 1rem;
+            }
+
+            .rich-editor-content {
+                font-size: 0.875rem;
+            }
+
+            .rich-editor-content h1, .rich-editor-content h2, .rich-editor-content h3, .rich-editor-content h4, .rich-editor-content h5, .rich-editor-content h6 {
+                font-size: 1rem;
+            }
+
+            .container article {
+                width: 100%;
+            }
+
+            .nav-categorias {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+
+            .nav-categorias a:nth-child(n+3) {
+                display: none;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding: 0;
+                margin: 0;
+            }
+
+            header {
+                height: 200px; /* Reducir altura */
+                padding: 1.5rem 1rem;
+                margin: 0;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 0.875rem;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav ul li {
+                margin-bottom: 0.5rem;
+            }
+
+            .nav ul li a {
+                padding: 0.5rem 1rem;
+            }
+
+            .rich-editor-content {
+                font-size: 0.875rem;
+            }
+
+            .rich-editor-content h1, .rich-editor-content h2, .rich-editor-content h3, .rich-editor-content h4, .rich-editor-content h5, .rich-editor-content h6 {
+                font-size: 1rem;
+            }
+
+            .container article {
+                width: 100%;
+            }
+
+            .header-help-button {
+                display: block;
+            }
+
+            .nav-categorias {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Mostrar todas las categorías */
+                gap: 0.5rem;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .header-help-button {
+                display: block;
+            }
+
+            .nav-categorias {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                gap: 0.5rem;
+            }
+        }
+
+        .nav-categorias {
+            padding: 0.25rem 0; /* Disminuir altura */
+            display: flex;
+            justify-content: center; /* Centrar contenido */
+        }
     </style>
 
     <!-- Font Awesome -->
@@ -89,18 +224,30 @@
 <body class="bg-white font-family-karla">
 
     <!-- Top Barra de Navegacion -->
-    <nav class="w-full py-4 bg-blue-800 shadow">
+    <nav id="nav principal" class="w-full py-4 bg-blue-800 shadow">
         <div class="container mx-auto flex justify-between items-center">
             <ul class="flex items-center space-x-4 font-bold text-sm text-white uppercase">
-                <li><a class="hover:bg-blue-600 rounded py-2 px-4 text-white" href="#">PANEL ADMIN</a></li>
+                <li><a class="hover:bg-blue-600 rounded py-2 px-4 text-white" href="/">INICIO</a></li>
+                <li><a class="hover:bg-blue-600 rounded py-2 px-4 text-white" href="/almafit-admin/login">ADMIN</a></li>
                 <li><a class="hover:bg-blue-600 rounded py-2 px-4 text-white" href="#">AYUDA</a></li>
-            </ul>
-            <div class="flex items-center space-x-6 text-white text-lg">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </ul>  
+             <!-- Botón para abrir el modal -->
+        <button onclick="document.getElementById('sugerenciasModal').classList.remove('hidden')" class="px-4 py-2 bg-indigo-500 text-white font-bold rounded-md hover:bg-indigo-700 uppercase header-help-button" style="width: auto;">
+            Sugerencias
+        </button>
+
+        <!-- Modal -->
+        <div id="sugerenciasModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
+            <div class="bg-white rounded-lg p-6 w-1/3">
+                <h2 class="text-xl font-bold mb-4">Envíanos tu sugerencia</h2>
+
+                @include('formulario') <!-- Incluye el formulario aquí -->
+
+                <button onclick="document.getElementById('sugerenciasModal').classList.add('hidden')" class="mt-4 px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-700">
+                    Cerrar
+                </button>
             </div>
+        </div>
         </div>
     </nav>
 
@@ -110,11 +257,11 @@
         <p class="text-lg text-white">Transforma tu cuerpo, eleva tu espíritu</p>
     </header>
 
-    <!-- Barra de Navegacion -->
-    <nav class="w-full py-4 bg-blue-800 border-t border-b">
+     <!-- Barra de Navegacion -->
+     <nav class="w-full py-4 bg-blue-800 border-t border-b nav-categorias">
         <div class="container mx-auto flex justify-center space-x-4 text-sm">
             @foreach($categorias as $categoria)
-                <a href="{{ route('categoria.show', $categoria->id) }}" class="hover:bg-blue-200 hover:text-black rounded py-5 px-7 text-white text-xl">{{ $categoria->nombre }}</a>
+                <a href="{{ route('categoria.show', $categoria->nombre) }}" class="hover:bg-blue-200 hover:text-black rounded py-5 px-7 text-white text-xl">{{ $categoria->nombre }}</a>
             @endforeach
         </div>
     </nav>
@@ -127,14 +274,14 @@
             
             <article class="flex flex-col shadow my-4" style="max-width: 700px; width: 100%;">
                 {{-- Imagen de la entrada --}}
-                <a href="/{{ $entrada->slug}}" class="hover:opacity-75" style="width: 100%;">
+                <a href="/entrada/{{ $entrada->slug}}" class="hover:opacity-75" style="width: 100%;">
                     <img src="http://localhost:8000/storage/{{$entrada->image_url}}" class="max-w-full h-auto" style="max-width: 100%; max-height: 700px;">
                 </a>
                 <div class="bg-white flex flex-col justify-start p-6 rich-editor-content" style="width: 100%;">
-                    <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">{{ $entrada->categoria->nombre}}</a>
-                    <a href="/{{ $entrada->slug}}" class="text-3xl font-bold hover:text-gray-700 pb-4">{{ $entrada->titulo }}</a>
+                    <a href="{{ route('categoria.show', $categoria->nombre) }}" class="text-blue-700 text-sm font-bold uppercase pb-4">{{ $entrada->categoria->nombre}}</a>
+                    <a href="/entrada/{{ $entrada->slug}}" class="text-3xl font-bold hover:text-gray-700 pb-4">{{ $entrada->titulo }}</a>
                     <p class="text-sm pb-3">Creado por <a href="#" class="font-semibold hover:text-gray-800">{{ $entrada->user->name }}</a>, Publicado el {{ $entrada->created_at->format('d-m-Y H:i:s') }}</p>
-                    <div class="pb-6">{!! ($entrada->cuerpo) !!}</div>
+                    <div class="pb-6 rich-editor-content" style="width: 100%; word-wrap: break-word;">{!!nl2br($entrada->cuerpo)!!}</div>
                     
                 </div>
             </article>

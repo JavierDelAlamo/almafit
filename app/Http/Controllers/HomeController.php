@@ -17,15 +17,16 @@ class HomeController extends Controller
 
     public function vistaentrada($slug)
     {
+        $categorias = Categoria::all();
         $entrada = Entrada::where('slug', $slug)->first();
-        return view('vistaentrada', ['entrada' => $entrada]);
+        return view('vistaentrada', compact('categorias', 'entrada'));
     }
 
-    public function showCategoria($id)
+    public function showCategoria($nombre)
     {
         $categorias = Categoria::all();
-        $categoria = Categoria::findOrFail($id);
-        $entradas = Entrada::where('categoria_id', $id)->get();
+        $categoria = Categoria::where('nombre', $nombre)->firstOrFail();
+        $entradas = Entrada::where('categoria_id', $categoria->id)->get();
         return view('categoria', compact('categorias', 'categoria', 'entradas'));
     }
 }

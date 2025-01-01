@@ -6,7 +6,7 @@ use App\Http\Controllers\SugerenciaController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/categoria/{id}', [HomeController::class, 'showCategoria'])->name('categoria.show');
+Route::get('/categoria/{nombre}', [HomeController::class, 'showCategoria'])->name('categoria.show');
 
 // Creamos la ruta para las entradas.blade que serán las URL con el slug
 Route::get('/entrada/{slug}', [HomeController::class, 'vistaentrada'])->name('entrada.show');
