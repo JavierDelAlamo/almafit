@@ -10,11 +10,16 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Actions;
 use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Carbon\Carbon;
+use Faker\Provider\ar_EG\Text;
+use Illuminate\Support\Facades\Auth;
 
 class SugerenciaResource extends Resource
 {
@@ -41,16 +46,17 @@ class SugerenciaResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nombre')->label('Nombre'),
-                TextColumn::make('email')->label('Correo Electrónico'),
-                TextColumn::make('mensaje')->label('Mensaje')->limit(50),
-                TextColumn::make('created_at')->label('Fecha de Creación')->dateTime(),
+                TextColumn::make('nombre')->label('Nombre')->searchable(),
+                TextColumn::make('email')->label('Correo Electrónico')->searchable(),
+                TextColumn::make('mensaje')->label('Mensaje')->limit(255),
+                
             ])
             ->filters([
                 //
             ])
             ->actions([
                 EditAction::make(),
+               
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),

@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User; //Añadimos la clase User
 use App\Models\Role;
+use App\Models\Sugerencia;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput; //Añadimos la clase TextInput
 use Filament\Forms\Form;
@@ -55,12 +56,11 @@ class UserResource extends Resource
                         ->default('almafit1234'), //Valor por defecto
     
                     //Añadimos un campo select para el rol
-                    Select::make('roles')
-                        ->multiple()
+                    Select::make('role')
                         ->relationship('roles', 'name')
                         ->label('Rol')
                         ->required()
-                        ->options(Role::all()->pluck('name', 'id')),
+                        ->multiple(false), // Permitir solo un rol
                     
             ]);      
     }
@@ -119,7 +119,8 @@ class UserResource extends Resource
                 ->action(function(User $user) { //Definimos la acción
                     $user->email_verified_at = null; // Revocar la fecha de verificación
                     $user->save(); //Guardamos el usuario
-                })
+                }),
+                
                 
             ])
             ->bulkActions([

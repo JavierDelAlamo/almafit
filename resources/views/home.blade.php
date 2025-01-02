@@ -334,7 +334,7 @@
     <nav id="nav principal" class="w-full py-4 bg-blue-800 shadow">
         <div class="container mx-auto flex justify-between items-center">
             <ul class="flex items-center space-x-4 font-bold text-sm text-white uppercase">
-                <li><a class="hover:bg-blue-600 rounded py-2 px-4 text-white" href="/almafit-admin/login">PANEL ADMIN</a></li>
+                <li><a class="hover:bg-blue-600 rounded py-2 px-4 text-white" href="/almafit-admin/login">LOGIN</a></li>
                 <li><a class="hover:bg-blue-600 rounded py-2 px-4 text-white" href="#">AYUDA</a></li>
             </ul>  
              <!-- Botón para abrir el modal -->

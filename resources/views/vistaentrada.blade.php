@@ -318,7 +318,7 @@
                     @csrf
                     <div class="mb-4">
                         <label for="email" class="block text-lg font-semibold text-black">Email (Registrado)</label>
-                        <input type="email" name="email" id="email" placeholder="Escribir email registrado aquí" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm pl-2" required>
+                        <input type="email" name="email" id="email" value="{{ Auth::user()->email }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm pl-2" readonly>
                     </div>
                     <div class="mb-4">
                         <label for="cuerpo" class="block text-lg font-semibold text-blue">Comentario</label>
@@ -330,7 +330,9 @@
                 </form>
             </div>
             @else
-            <p class="mt-8 text-red-500">Debes estar registrado para poder comentar.</p>
+            <p class="mt-8 text-red-500 font-extrabold text-xl border border-black p-4 bg-yellow-100">
+                Debes estar registrado para poder comentar.
+            </p>
             @endauth
             
         </section>

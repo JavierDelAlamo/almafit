@@ -9,5 +9,5 @@ class Sugerencia extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'email', 'mensaje'];
+    protected $fillable = ['nombre', 'email', 'mensaje', 'leido'];
 }
