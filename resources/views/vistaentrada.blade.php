@@ -286,9 +286,52 @@
                 </div>
             </article>
             
+            <!-- Sección de Comentarios -->
+            <div class="w-full max-w-2xl mt-8">
+                <h1 class="text-4xl font-extrabold text-black-600 mb-6">Comentarios</h1>
+                @foreach($entrada->comentarios as $comentario)
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <p class="font-semibold">{{ $comentario->user_comentario }}</p>
+                        <p class="text-sm text-gray-600">{{ $comentario->created_at->format('d-m-Y H:i:s') }}</p>
+                        <p class="mt-2">{{ $comentario->cuerpo }}</p>
+                    </div>
+                @endforeach
+            </div>
 
-            <!-- Entradas -->
-            
+            <!-- Mostrar mensajes de éxito o error -->
+            @if(session('success'))
+                <div class="w-full max-w-2xl mt-4 bg-green-100 text-green-700 p-4 rounded-lg">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="w-full max-w-2xl mt-4 bg-red-100 text-red-700 p-4 rounded-lg">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            <!-- Formulario para agregar un comentario -->
+            @auth
+            <div class="w-full max-w-2xl mt-8 bg-blue-100 p-6 rounded-lg">
+                <h1 class="text-4xl font-extrabold text-black-600 mb-6">Agregar un comentario</h1>
+                <form id="comentarioForm" action="{{ route('comentarios.store', ['entrada' => $entrada->id]) }}" method="POST">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="email" class="block text-lg font-semibold text-black">Email (Registrado)</label>
+                        <input type="email" name="email" id="email" placeholder="Escribir email registrado aquí" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm pl-2" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="cuerpo" class="block text-lg font-semibold text-blue">Comentario</label>
+                        <textarea name="cuerpo" id="cuerpo" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Enviar</button>
+                    </div>
+                </form>
+            </div>
+            @else
+            <p class="mt-8 text-red-500">Debes estar registrado para poder comentar.</p>
+            @endauth
             
         </section>
 

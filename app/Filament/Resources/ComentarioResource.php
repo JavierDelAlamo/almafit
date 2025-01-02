@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class ComentarioResource extends Resource
 {
@@ -26,6 +27,20 @@ class ComentarioResource extends Resource
                 Forms\Components\Select::make('entrada_id')
                     ->relationship('entrada', 'titulo')
                     ->required(),
+                Forms\Components\TextInput::make('user_comentario')
+                    ->default(Auth::user()->name)
+                    ->disabled()
+                    // ->default(fn() => Auth::user()->name) // Usamos un callback
+                    
+                    
+                    ->required(),
+                    
+                Forms\Components\TextInput::make('email')
+                    ->default(Auth::user()->email)
+                    ->disabled()
+                    // ->default(fn() => Auth::user()->email) // Usamos un callback
+                    
+                    ->required(),
                 Forms\Components\Textarea::make('cuerpo')
                     ->label('Comentario')
                     ->required()
@@ -38,12 +53,11 @@ class ComentarioResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('entrada.titulo'),
-                    
-                    
+                Tables\Columns\TextColumn::make('user_comentario')
+                    ->label('Usuario'),
+                Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('cuerpo')
                     ->label('Comentario'),
-                    
-                    
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
