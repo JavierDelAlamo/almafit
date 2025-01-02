@@ -87,7 +87,11 @@
                 margin: 0; /* Sin márgenes */
                 padding: 0; /* Sin relleno */
             }
-
+            /* Ocultar botón de sugerencias */
+            .boton-sugerencias {
+            width: 100%;
+            visibility: hidden;
+        }
             .container, .nav, header, .nav-categorias, .container article {
                 margin: 0; /* Sin márgenes */
                 padding: 0; /* Sin relleno */
@@ -134,9 +138,10 @@
             .container article {
                 width: 100%;
             }
-
+            /* Ocultar botón de sugerencias */
             .header-help-button {
-                display: none;
+            width: 100%;
+            visibility: hidden;
             }
 
             .nav-categorias {

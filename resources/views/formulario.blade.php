@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> <!-- Asegúrate de tener un archivo CSS si usas uno -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
     <style>
         .form-container {
             max-width: 600px;
@@ -65,11 +65,36 @@
             display: none;
             margin-bottom: 1.5rem;
             padding: 1rem;
-            background-color: #d4edda;
+            background-color: #83e299;
             color: #155724;
             border: 1px solid #c3e6cb;
             border-radius: 4px;
         }
+                /* Estilos para el texto "Enviado correctamente" */
+                .success-message p {
+            font-size: 1.25rem; /* Aumenta el tamaño de la fuente para "Enviado correctamente" */
+            font-weight: bold;  /* Hace que el texto sea más destacado */
+            margin-bottom: 1rem; /* Agrega espacio debajo del texto para separar del botón */
+            }
+            /* Estilos para el botón de cerrar */
+            .success-message button {
+            width: 100%; /* Hace que el botón ocupe todo el ancho del contenedor */
+            padding: 0.75rem; /* Espaciado interno para que el botón no se vea demasiado pequeño */
+            background-color: #6c757d; /* Color del botón */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1rem; /* Tamaño de la fuente del botón */
+            margin-top: 1rem; /* Añade separación entre el texto y el botón */
+            display: block; /* Centra el botón */
+            margin: 1rem auto 0; /* Añade separación y centra el botón */
+        }           
+        .success-message button:hover {
+            background-color: #495057; /* Cambia el color de fondo cuando el cursor pasa sobre el botón */
+        }
+                
         .success-message.show {
             display: block;
         }
@@ -85,21 +110,21 @@
         </div>
 
         <form id="sugerencia-form" action="{{ route('sugerencias.store') }}" method="POST">
-            @csrf <!-- Token de seguridad obligatorio en Laravel -->
+            @csrf 
 
             <div class="form-group">
                 <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                <input type="text" name="nombre" id="nombre" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                <input type="text" name="nombre" id="nombre" placeholder="Escribe aquí tu nombre" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
             </div>
 
             <div class="form-group">
                 <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                <input type="email" name="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                <input type="email" name="email" id="email" placeholder="Escribe aquí tu correo electrónico" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
             </div>
 
             <div class="form-group">
                 <label for="mensaje" class="block text-sm font-medium text-gray-700">Mensaje</label>
-                <textarea name="mensaje" id="mensaje" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                <textarea name="mensaje" id="mensaje" placeholder="Escribe aquí tu mensaje" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
             </div>
 
             <div class="form-group flex justify-end">

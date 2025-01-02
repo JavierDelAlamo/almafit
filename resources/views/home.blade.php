@@ -231,7 +231,8 @@
         }
 
         .header-help-button {
-            display: none;
+            width: 100%;
+            visibility: hidden;
         }
 
         .nav-categorias {
@@ -242,6 +243,10 @@
 
         .nav-categorias a:nth-child(n+3) {
             display: none;
+        }
+        .boton-sugerencias {
+            width: 100%;
+            visibility: hidden;
         }
     }
 
